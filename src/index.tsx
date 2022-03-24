@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './RootApp/App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { setupStore } from './store/store';
+import './style/style.scss';
 
 const store = setupStore();
 

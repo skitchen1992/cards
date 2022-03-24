@@ -1,20 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ICharList {}
+import { ICharList } from '../../RootApp/const';
 
 interface IUserState {
-  charList: ICharList[];
+  charList?: ICharList[];
   isLoading: boolean;
-  error: string;
-  count: number;
+  error: boolean;
 }
 
 const initialState: IUserState = {
   charList: [],
-  isLoading: false,
-  error: '',
-  count: 0,
+  isLoading: true,
+  error: false,
 };
 
 export const charSlice = createSlice({
@@ -26,19 +22,12 @@ export const charSlice = createSlice({
     },
     charsFetchingSuccess(state, action: PayloadAction<ICharList[]>) {
       state.isLoading = false;
-      state.error = '';
       state.charList = action.payload;
     },
-    charsFetchingError(state, action: PayloadAction<string>) {
+    charsFetchingError(state) {
       state.isLoading = false;
-      state.error = action.payload;
+      state.error = false;
     },
-    // charList(state, action: PayloadAction<ICharList[]>) {
-    //   state.charList = action.payload;
-    // },
-    // incr(state, action: PayloadAction<number>) {
-    //   state.count = action.payload;
-    // },
   },
 });
 
