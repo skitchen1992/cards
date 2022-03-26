@@ -30,7 +30,7 @@ export const charSlice = createSlice({
       state.isLoading = false;
       state.error = true;
     },
-    charActive(state, action: PayloadAction<IActiveChar>) {
+    setSharActive(state, action: PayloadAction<IActiveChar>) {
       const idx = action.payload.index;
       const isActive = action.payload.isActive;
       state.charList[idx].isActive = isActive;

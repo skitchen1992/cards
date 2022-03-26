@@ -11,19 +11,17 @@ const ErrorMessage: React.FC<IErrorMessage> = (props) => {
   if (!error) return null;
 
   return (
-    <div>
-      <img
-        style={{
-          display: 'block',
-          width: '250px',
-          height: '250px',
-          objectFit: 'contain',
-          margin: '0 auto',
-        }}
-        src={img}
-        alt="Error"
-      />
-    </div>
+    <img
+      style={{
+        display: 'block',
+        width: '250px',
+        height: '250px',
+        objectFit: 'contain',
+        margin: '0 auto',
+      }}
+      src={img}
+      alt="Error"
+    />
   );
 };
 

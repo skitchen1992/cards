@@ -1,15 +1,15 @@
 import React from 'react';
-import './appHeader.scss';
+import useStyles from './styles';
+import Box from '@mui/material/Box';
 
 const AppHeader: React.FC = () => {
+  const classes = useStyles();
   return (
-    <header className="app__header">
-      <h1 className="app__title">
-        <a href="#">
-          <span>Marvel</span> information portal
-        </a>
-      </h1>
-    </header>
+    <Box sx={classes.root}>
+      <Box sx={classes.title}>
+        <span style={{ color: '#9F0013' }}>Marvel</span> information portal
+      </Box>
+    </Box>
   );
 };
 

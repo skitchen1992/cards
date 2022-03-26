@@ -2,18 +2,19 @@ import React from 'react';
 import AppHeader from '../components/AppHeader/AppHeader';
 import decoration from '../resources/img/vision.png';
 import CharList from './CharList/CharList';
+import useStyles from './styles';
+import Box from '@mui/material/Box';
 
 const App: React.FC = () => {
+  const classes = useStyles();
   return (
-    <div className="app">
+    <Box sx={classes.root}>
       <AppHeader />
-      <main>
-        <div className="char__content">
-          <CharList />
-        </div>
-        <img className="bg-decoration" src={decoration} alt="vision" />
-      </main>
-    </div>
+      <CharList />
+      <Box sx={classes.bgDecoration}>
+        <img src={decoration} alt="vision" />
+      </Box>
+    </Box>
   );
 };
 

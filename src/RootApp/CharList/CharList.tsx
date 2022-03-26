@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchChars } from '../../store/reducers/ActionCreators';
-import './charList.scss';
 import Spinner from '../../components/Spinner/Spinner';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import CharItem from '../CharItem/CharItem';
 import { charSlice } from '../../store/reducers/CharSlice';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import Filter from '../Filter/Filter';
+import Box from '@mui/material/Box';
+import useStyles from './styles';
 
 const CharList = () => {
   const dispatch = useAppDispatch();
-
+  const classes = useStyles();
   useEffect(() => {
     dispatch(fetchChars());
   }, []);
@@ -37,20 +37,20 @@ const CharList = () => {
   }
 
   return (
-    <div className="char__list">
-      <div onClick={onSetFilter}>
-        {isFilter ? <FilterAltIcon color="error" /> : <FilterAltOffIcon color="error" />}
-      </div>
-      <Spinner isLoading={isLoading} />
-      <ErrorMessage error={error} />
-      {!(isLoading || error) && (
-        <ul className="char__grid">
-          {visibleData?.map((item, index) => (
-            <CharItem key={item.id} item={item} index={index} removeChar={removeChar} />
-          ))}
-        </ul>
-      )}
-    </div>
+    <Box sx={classes.root}>
+      <Box>
+        <Filter isFilter={isFilter} onSetFilter={onSetFilter} />
+        <Spinner isLoading={isLoading} />
+        <ErrorMessage error={error} />
+        {!(isLoading || error) && (
+          <Box sx={classes.grid}>
+            {visibleData?.map((item, index) => (
+              <CharItem key={item.id} item={item} index={index} removeChar={removeChar} />
+            ))}
+          </Box>
+        )}
+      </Box>
+    </Box>
   );
 };
 

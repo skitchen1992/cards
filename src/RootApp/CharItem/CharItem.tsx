@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
 import { IChar } from '../const';
-import './charItem.scss';
 import { useAppDispatch } from '../../hooks/redux';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { charSlice } from '../../store/reducers/CharSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
+import useStyles from './styles';
+import Box from '@mui/material/Box';
 
 interface ICharItem {
   item: IChar;
@@ -15,21 +16,35 @@ interface ICharItem {
 const CharItem: React.FC<ICharItem> = (props) => {
   const { item, index, removeChar } = props;
   const dispatch = useAppDispatch();
-
+  const classes = useStyles();
   const onSetActive = () => {
-    dispatch(charSlice.actions.charActive({ index, isActive: !item.isActive }));
+    dispatch(charSlice.actions.setSharActive({ index, isActive: !item.isActive }));
   };
 
   return (
-    <li className="char__item" key={item.id}>
-      <img src={`${item.thumbnail.path}.${item.thumbnail.extension}`} alt={item.name} />
-      <div className="char__name">{item.name}</div>
-
-      <div onClick={onSetActive}>
-        {item.isActive ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon color="error" />}
-      </div>
-      <DeleteIcon onClick={() => removeChar(item.id)} color="error" />
-    </li>
+    <Box sx={classes.root}>
+      <Box sx={classes.actions}>
+        <Box onClick={onSetActive}>
+          {item.isActive ? (
+            <FavoriteIcon sx={{ cursor: 'pointer' }} color="error" />
+          ) : (
+            <FavoriteBorderIcon sx={{ cursor: 'pointer' }} color="error" />
+          )}
+        </Box>
+        <DeleteIcon sx={{ cursor: 'pointer' }} onClick={() => removeChar(item.id)} color="error" />
+      </Box>
+      <img
+        style={{
+          width: '200px',
+          height: '200px',
+          transform: 'translate(-15px, -15px)',
+          marginTop: '16px',
+        }}
+        src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+        alt={item.name}
+      />
+      <Box sx={classes.charName}>{item.name}</Box>
+    </Box>
   );
 };
 
