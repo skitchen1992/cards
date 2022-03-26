@@ -1,7 +1,15 @@
 import React from 'react';
 import img from './error.gif';
 
-const ErrorMessage = () => {
+interface IErrorMessage {
+  error: boolean;
+}
+
+const ErrorMessage: React.FC<IErrorMessage> = (props) => {
+  const { error } = props;
+
+  if (!error) return null;
+
   return (
     <div>
       <img

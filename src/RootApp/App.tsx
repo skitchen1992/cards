@@ -1,9 +1,9 @@
 import React from 'react';
 import AppHeader from '../components/AppHeader/AppHeader';
 import decoration from '../resources/img/vision.png';
-import CharList from '../components/CharList/CharList';
+import CharList from './CharList/CharList';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="app">
       <AppHeader />
@@ -15,6 +15,6 @@ function App() {
       </main>
     </div>
   );
-}
+};
 
 export default App;
