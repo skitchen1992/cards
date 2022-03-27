@@ -9,7 +9,7 @@ import Filter from '../Filter/Filter';
 import Box from '@mui/material/Box';
 import useStyles from './styles';
 
-const CharList = () => {
+const CharList: React.FC = () => {
   const dispatch = useAppDispatch();
   const classes = useStyles();
   useEffect(() => {
