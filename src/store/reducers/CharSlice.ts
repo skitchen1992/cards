@@ -6,6 +6,7 @@ interface IUserState {
   isLoading: boolean;
   error: boolean;
   isFilter: boolean;
+  selectedChar: Record<number, boolean>;
 }
 
 const initialState: IUserState = {
@@ -13,6 +14,7 @@ const initialState: IUserState = {
   isLoading: true,
   error: false,
   isFilter: false,
+  selectedChar: {},
 };
 
 export const charSlice = createSlice({
