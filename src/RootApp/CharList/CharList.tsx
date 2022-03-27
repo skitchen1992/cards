@@ -12,6 +12,7 @@ import useStyles from './styles';
 const CharList: React.FC = () => {
   const dispatch = useAppDispatch();
   const classes = useStyles();
+
   useEffect(() => {
     dispatch(fetchChars());
   }, []);
@@ -24,7 +25,7 @@ const CharList: React.FC = () => {
     dispatch(charSlice.actions.setFilter({ isFilter: !isFilter }));
   };
 
-  const removeChar = (id: number) => {
+  const onRemoveChar = (id: number) => {
     visibleData = charList.filter((item) => item.id !== id);
     dispatch(charSlice.actions.removeChar(visibleData));
   };
@@ -45,7 +46,7 @@ const CharList: React.FC = () => {
         {!(isLoading || error) && (
           <Box sx={classes.grid}>
             {visibleData?.map((item, index) => (
-              <CharItem key={item.id} item={item} index={index} removeChar={removeChar} />
+              <CharItem key={item.id} item={item} index={index} onRemoveChar={onRemoveChar} />
             ))}
           </Box>
         )}

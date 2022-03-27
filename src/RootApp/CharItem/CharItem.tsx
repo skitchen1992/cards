@@ -11,12 +11,14 @@ import Box from '@mui/material/Box';
 interface ICharItem {
   item: IChar;
   index: number;
-  removeChar: (id: number) => void;
+  onRemoveChar: (id: number) => void;
 }
 const CharItem: React.FC<ICharItem> = (props) => {
-  const { item, index, removeChar } = props;
+  const { item, index, onRemoveChar } = props;
+
   const dispatch = useAppDispatch();
   const classes = useStyles();
+
   const onSetActive = () => {
     dispatch(charSlice.actions.setSharActive({ index, isActive: !item.isActive }));
   };
@@ -31,7 +33,11 @@ const CharItem: React.FC<ICharItem> = (props) => {
             <FavoriteBorderIcon sx={{ cursor: 'pointer' }} color="error" />
           )}
         </Box>
-        <DeleteIcon sx={{ cursor: 'pointer' }} onClick={() => removeChar(item.id)} color="error" />
+        <DeleteIcon
+          sx={{ cursor: 'pointer' }}
+          onClick={() => onRemoveChar(item.id)}
+          color="error"
+        />
       </Box>
       <img
         style={{
