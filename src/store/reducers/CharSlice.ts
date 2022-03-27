@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ICharList {}
+import { IActiveChar, IChar, IFiltersChar } from '../../RootApp/const';
 
 interface IUserState {
-  charList: ICharList[];
+  charList: IChar[];
   isLoading: boolean;
-  error: string;
-  count: number;
+  error: boolean;
+  isFilter: boolean;
+  selectedChar: Record<number, boolean>;
 }
 
 const initialState: IUserState = {
   charList: [],
-  isLoading: false,
-  error: '',
-  count: 0,
+  isLoading: true,
+  error: false,
+  isFilter: false,
+  selectedChar: {},
 };
 
 export const charSlice = createSlice({
@@ -24,21 +24,25 @@ export const charSlice = createSlice({
     charsFetching(state) {
       state.isLoading = true;
     },
-    charsFetchingSuccess(state, action: PayloadAction<ICharList[]>) {
+    charsFetchingSuccess(state, action: PayloadAction<IChar[]>) {
       state.isLoading = false;
-      state.error = '';
       state.charList = action.payload;
     },
-    charsFetchingError(state, action: PayloadAction<string>) {
+    charsFetchingError(state) {
       state.isLoading = false;
-      state.error = action.payload;
+      state.error = true;
     },
-    // charList(state, action: PayloadAction<ICharList[]>) {
-    //   state.charList = action.payload;
-    // },
-    // incr(state, action: PayloadAction<number>) {
-    //   state.count = action.payload;
-    // },
+    setSharActive(state, action: PayloadAction<IActiveChar>) {
+      const idx = action.payload.index;
+      const isActive = action.payload.isActive;
+      state.charList[idx].isActive = isActive;
+    },
+    removeChar(state, action: PayloadAction<IChar[]>) {
+      state.charList = action.payload;
+    },
+    setFilter(state, action: PayloadAction<IFiltersChar>) {
+      state.isFilter = action.payload.isFilter;
+    },
   },
 });
 

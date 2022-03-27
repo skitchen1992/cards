@@ -20,12 +20,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "paths": {
-      "api": ["api/*"],
-      "app": ["app/*"],
-      "components": ["components/*"],
-      "pages": ["pages/*"]
-    }
   },
   "include": [
     "src"
